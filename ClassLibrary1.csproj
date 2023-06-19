@@ -9,4 +9,8 @@
     <PackageReference Include="AutoCAD.NET" Version="24.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
 </Project>

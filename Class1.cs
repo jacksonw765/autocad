@@ -1,19 +1,43 @@
 ﻿using System;
-using Autodesk.AutoCAD.ApplicationServices;
+using System.Reflection.Emit;
+using AppService = Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
+using System.Windows.Forms;
 using Autodesk.AutoCAD.Runtime;
+using Autodesk.AutoCAD.ApplicationServices;
 
 namespace AutoCADSnowman
 {
+    public class ShowUI
+    {
+        [CommandMethod("DisplayUI")]
+        public void DisplayUI()
+        {
+            // Create a form
+            Form myForm = new Form();
+            myForm.Text = "AutoCAD Interface";
+            myForm.Width = 400;
+            myForm.Height = 200;
 
+            // Add a label to the form
+            var myLabel = new System.Windows.Forms.Label();
+            myLabel.Text = "Hello, AutoCAD!";
+            myLabel.AutoSize = true;
+            myLabel.Location = new System.Drawing.Point(150, 80);
+            myForm.Controls.Add(myLabel);
+
+            // Show the form
+            AppService.Application.ShowModalDialog(myForm);
+        }
+    }
     public class ObjectDeletion
     {
         [CommandMethod("DeleteObjectsByColor")]
         public void DeleteObjectsByColor()
         {
-            Document doc = Application.DocumentManager.MdiActiveDocument;
+            Document doc = AppService.Application.DocumentManager.MdiActiveDocument;
             Database db = doc.Database;
             Editor editor = doc.Editor;
 
@@ -69,7 +93,7 @@ namespace AutoCADSnowman
         [CommandMethod("ListTextObjects")]
         public void ListTextObjects()
         {
-            Document doc = Application.DocumentManager.MdiActiveDocument;
+            Document doc = AppService.Application.DocumentManager.MdiActiveDocument;
             Editor editor = doc.Editor;
             Database database = doc.Database;
 
@@ -97,7 +121,7 @@ namespace AutoCADSnowman
         [CommandMethod("CreateSnowman")]
         public void CreateSnowman()
         {
-            Document doc = Application.DocumentManager.MdiActiveDocument;
+            Document doc = AppService.Application.DocumentManager.MdiActiveDocument;
             Database db = doc.Database;
             Editor editor = doc.Editor;
 
